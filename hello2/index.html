@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Hello Hello _insert name here_!</h1>
+  <h1>Hello _insert name here_!</h1>
   
   <input type="text" id="inputtext" /> <input type="submit" id="submit" />
   <script>
@@ -20,7 +20,7 @@
         var req = {
           name: $("#inputtext").val()
         };
-        $.post(BASE_URL + "/meetup-hello2", req, function(data) {
+        $.post(BASE_URL + "/meetup-hello2", JSON.stringify(req), function(data) {
           $("#output").text(JSON.stringify(data, null, 4));
         })
       });
