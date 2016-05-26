@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>DANGER DANGER DANGER</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>DANGER DANGER DANGER</h1>
+  
+  <input type="text" id="inputtext" /> <input type="submit" id="submit" />
+  <script>
+    var BASE_URL = "https://tkd4a8igdj.execute-api.us-west-2.amazonaws.com/prod"
+    $(function() {
+      $("#submit").click(function() {
+        $("#outputstd").text("loading...");
+        $("#outputerr").text("loading...");
+        var req = {
+          cmd: $("#inputtext").val()
+        };
+        $.post(BASE_URL + "/meetup-exec", JSON.stringify(req), function(data) {
+        
+          $("#outputstd").text(data.stdout);
+          $("#outputerr").text(data.stderr);
+          
+        })
+      });
+    });
+    
+  </script>
+  
+  <p>
+    <h3>stdout:</h3>
+    <pre id="outputstd">
+      
+    </pre>
+  </p>
+  <p>
+    <h3>stderr:</h3>
+    <pre id="outputerr">
+      
+    </pre>
+  </p>
+</body>
+</html>
