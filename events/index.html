@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>S3 Events</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.3.15/aws-sdk.min.js"></script>
+
+</head>
+
+<body>
+  <h1>S3 Events</h1>
+  
+  <input type="text" id="inputtext" /> <input type="submit" id="submit" />
+  <script>
+  
+  var listObjects = function() {
+    var bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
+    bucket.listObjects(function (err, data) {
+      if (err) {
+          alert('Could not load objects from S3');
+      } else {
+        for (var i = 0; i < data.Contents.length; i++) {
+          document.getElementById('outputlist').innerHTML +='<li>' + data.Contents[i].Key + '</li>';
+        }
+      }
+    });
+  }
+    
+  
+  
+    var BASE_URL = "https://tkd4a8igdj.execute-api.us-west-2.amazonaws.com/prod"
+    $(function() {
+    
+      AWS.config.update({accessKeyId: 'AKIAIYEOGRKMWR5KAHFA', secretAccessKey: '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'});
+      AWS.config.region = 'us-west-2';
+      
+      $("#submit").click(function() {
+        $("#outputstd").text("loading...");
+        $("#outputerr").text("loading...");
+        var req = {
+          cmd: $("#inputtext").val()
+        };
+        $.post(BASE_URL + "/meetup-exec", JSON.stringify(req), function(data) {
+        
+          $("#outputstd").text(data.stdout);
+          $("#outputerr").text(data.stderr);
+          
+        })
+      });
+    });
+    
+  </script>
+  
+  <p>
+    <h3>stdout:</h3>
+    <pre id="outputstd">
+      
+    </pre>
+  </p>
+  <p>
+    <h3>S3 Files:</h3>
+    <ul id="outputlist">
+      
+    </ul>
+  </p>
+</body>
+</html>
