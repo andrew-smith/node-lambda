@@ -13,10 +13,12 @@
   
   <input type="submit" id="submit" />
   <script>
+    var BASE_URL = "https://tkd4a8igdj.execute-api.us-west-2.amazonaws.com/prod"
     $(function() {
       $("#submit").click(function() {
-        
-        alert(1);
+        $.get(BASE_URL + "/hello", function(data) {
+          $("#output").text(JSON.stringify(data, null, 4));
+        })
       });
     });
     
