@@ -16,7 +16,7 @@
     var BASE_URL = "https://tkd4a8igdj.execute-api.us-west-2.amazonaws.com/prod"
     $(function() {
       $("#submit").click(function() {
-        $.get(BASE_URL + "/hello", function(data) {
+        $.get(BASE_URL + "/meetup-hello", function(data) {
           $("#output").text(JSON.stringify(data, null, 4));
         })
       });
