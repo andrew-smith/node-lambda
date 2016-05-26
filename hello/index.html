@@ -11,7 +11,21 @@
 <body>
   <h1>Hello Lambda!</h1>
   
-  <input type="submit">Go!</input>
-  <script>alert(1)</script>
+  <input type="submit" id="submit" />
+  <script>
+    $(function() {
+      $("#submit").click(function() {
+        
+        alert(1);
+      });
+    });
+    
+  </script>
+  
+  <p>
+    <pre id="output">
+      
+    </pre>
+  </p>
 </body>
 </html>
