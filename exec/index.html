@@ -29,7 +29,12 @@
           }
           else {
               $("#outputstd").text("");
-              $("#outputerr").text(JSON.stringify(data, null, 4));
+              if(data.errorMessage) {
+                  $("#outputerr").text(data.errorMessage);
+              }
+              else {
+                  $("#outputerr").text(JSON.stringify(data, null, 4));
+              }
           }
         })
       });
