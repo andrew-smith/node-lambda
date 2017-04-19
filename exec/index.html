@@ -22,10 +22,15 @@
           cmd: $("#inputtext").val()
         };
         $.post(BASE_URL + "/exec", JSON.stringify(req), function(data) {
-        
-          $("#outputstd").text(data.stdout);
-          $("#outputerr").text(data.stderr);
           
+          if(data.stdout || data.stderr) {
+              $("#outputstd").text(data.stdout);
+              $("#outputerr").text(data.stderr);
+          }
+          else {
+              $("#outputstd").text("");
+              $("#outputerr").text(JSON.stringify(data, null, 4));
+          }
         })
       });
     });
